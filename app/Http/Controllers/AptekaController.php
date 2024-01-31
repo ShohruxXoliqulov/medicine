@@ -3,61 +3,40 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreAptekaRequest;
-use App\Http\Requests\UpdateAptekaRequest;
-use App\Http\Resources\AptekaResource;
-use App\Http\Resources\UserResource;
-use App\Models\Apteka;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Services\AptekaService;
 
 class AptekaController extends Controller
 {
+    private $aptekaService ;
+    public function __construct(AptekaService $aptekaService)
+    {
+        $this->aptekaService = $aptekaService ;
+    }
 
     public function index()
     {
-        $aptekas = Apteka::all();
-
-        return $this->response(AptekaResource::collection($aptekas));
+        return $this->aptekaService->getAll();
     }
 
 
     public function store(StoreAptekaRequest $request)
     {
-        try {
-            $apteka = Apteka::create($request->all());
-
-            return $this->success('Successfully added', $apteka);
-        } catch (\Exception $e){
-
-            return $this->error('Something went wrong!', $e->getMessage());
-        }
+        return $this->aptekaService->create($request);
     }
 
-    public function show(Apteka $apteka)
+    public function show($id)
     {
-        if ($apteka) {
-            return $this->response(new AptekaResource($apteka));
-        } else{
-            return $this->error('Apteka not found', $apteka);
-        }
+        return $this->aptekaService->getById($id);
     }
 
 
-    public function update(UpdateAptekaRequest $request, Apteka $apteka)
+    public function update(StoreAptekaRequest $request, $id)
     {
-        if ($apteka){
-            $apteka->update($request->all());
-            return $this->success('Successfully updated', $apteka);
-        } else
-            return $this->error('Apteka not found', 404);
-
+        return $this->aptekaService->update($request, $id);
     }
 
-    public function destroy(Apteka $apteka)
+    public function destroy($id)
     {
-        if ($apteka){
-            $apteka->delete();
-            return $this->success('Successfully deleted', $apteka);
-        }else
-            return $this->error('Apteka not found', 404);
+        return $this->aptekaService->delete($id);
     }
 }

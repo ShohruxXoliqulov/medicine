@@ -4,38 +4,42 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreWarehouseRequest;
 use App\Http\Requests\UpdateWarehouseRequest;
-use App\Http\Resources\WarehouseResource;
-use App\Models\Warehouse;
+use App\Services\WarehouseService;
 
 class WarehouseController extends Controller
 {
 
+    private $warehouseService;
+
+    public function __construct(WarehouseService $warehouseService)
+    {
+        $this->warehouseService = $warehouseService;
+    }
+
     public function index()
     {
-        $warehouses = Warehouse::all();
-
-        return $this->response(WarehouseResource::collection($warehouses));
+        return $this->warehouseService->getAll();
     }
 
 
     public function store(StoreWarehouseRequest $request)
     {
-        //
+        return $this->warehouseService->create($request);
     }
 
-    public function show(Warehouse $warehouse)
+    public function show($id)
     {
-        return $this->response(new WarehouseResource($warehouse));
+        return $this->warehouseService->getById($id);
     }
 
 
-    public function update(UpdateWarehouseRequest $request, Warehouse $warehouse)
+    public function update(UpdateWarehouseRequest $request, $id)
     {
-        //
+        return $this->warehouseService->update($request, $id);
     }
 
-    public function destroy(Warehouse $warehouse)
+    public function destroy($id)
     {
-        //
+        return $this->warehouseService->delete($id);
     }
 }

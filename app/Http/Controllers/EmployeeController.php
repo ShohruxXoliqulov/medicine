@@ -4,54 +4,41 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
-use App\Http\Resources\EmployeeResource;
-use App\Models\Employee;
+use App\Services\EmployeeService;
 
 class EmployeeController extends Controller
 {
 
+    private $employeeService ;
+
+    public function __construct(EmployeeService $employeeService)
+    {
+        $this->employeeService = $employeeService ;
+    }
     public function index()
     {
-        $employees = Employee::all();
-
-        return $this->response(EmployeeResource::collection($employees));
+        return $this->employeeService->getAll();
     }
 
 
     public function store(StoreEmployeeRequest $request)
     {
-        try {
-            $employee = Employee::create($request->all());
-            return $this->success('Successfully added', $employee);
-        } catch(\Throwable $e) {
-            return $this->error('Something went wrong', $e);
-        }
+        return $this->employeeService->create($request);
     }
 
-    public function show(Employee $employee)
+    public function show($id)
     {
-        if ($employee) {
-            return $this->response(new EmployeeResource($employee));
-        }
-        return $this->error('Employee doesn\'t exist', 404);
+        return $this->employeeService->getById($id);
     }
 
 
-    public function update(UpdateEmployeeRequest $request, Employee $employee)
+    public function update(UpdateEmployeeRequest $request, $id)
     {
-        if ($employee) {
-            $employee->update($request->all());
-            return $this->success('Successfully updated', $employee);
-        }
-        return $this->error('Doctor does\'t exist', 404);
+        return $this->employeeService->update($request, $id);
     }
 
-    public function destroy(Employee $employee)
+    public function destroy($id)
     {
-        if ($employee) {
-            $employee->delete();
-            return $this->success('Successfully deleted', $employee);
-        }
-        return $this->error('Doctor does\'t exist', 404);
+        return $this->employeeService->delete($id);
     }
 }

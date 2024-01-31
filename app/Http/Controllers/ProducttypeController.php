@@ -4,39 +4,43 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProducttypeRequest;
 use App\Http\Requests\UpdateProducttypeRequest;
-use App\Http\Resources\ProductTypeResource;
-use App\Models\Producttype;
+use App\Services\ProductTypeService;
 
 class ProducttypeController extends Controller
 {
 
+    private $productTypeService;
+
+    public function __construct(ProductTypeService $productTypeService)
+    {
+        $this->productTypeService = $productTypeService;
+    }
+
     public function index()
     {
-        $producttypes = Producttype::all();
-
-        return $this->response(ProductTypeResource::collection($producttypes));
+        return $this->productTypeService->getAll();
     }
 
 
     public function store(StoreProducttypeRequest $request)
     {
-        //
+        return $this->productTypeService->create($request);
     }
 
 
-    public function show(Producttype $producttype)
+    public function show($id)
     {
-        return $this->response(new ProductTypeResource($producttype));
+        return $this->productTypeService->getById($id);
     }
 
 
-    public function update(UpdateProducttypeRequest $request, Producttype $producttype)
+    public function update(UpdateProducttypeRequest $request, $id)
     {
-        //
+        return $this->productTypeService->update($request, $id);
     }
 
-    public function destroy(Producttype $producttype)
+    public function destroy($id)
     {
-        //
+        return $this->productTypeService->delete($id);
     }
 }

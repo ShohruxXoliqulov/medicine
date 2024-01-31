@@ -4,39 +4,41 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMeetingRequest;
 use App\Http\Requests\UpdateMeetingRequest;
-use App\Http\Resources\MeetingResource;
-use App\Models\Meeting;
+use App\Services\MeetingService;
 
 class MeetingController extends Controller
 {
 
+    private $meetingService;
+
+    public function __construct(MeetingService $meetingService)
+    {
+        $this->meetingService = $meetingService;
+    }
     public function index()
     {
-        $meetings =  Meeting::all();
-//        dd($meetings);
-
-        return $this->response(MeetingResource::collection($meetings));
+        return $this->meetingService->getAll();
     }
 
 
     public function store(StoreMeetingRequest $request)
     {
-        //
+        return $this->meetingService->create($request);
     }
 
-    public function show(Meeting $meeting)
+    public function show($id)
     {
-        return $this->response(new MeetingResource($meeting));
+        return $this->meetingService->getById($id);
     }
 
 
-    public function update(UpdateMeetingRequest $request, Meeting $meeting)
+    public function update(UpdateMeetingRequest $request, $id)
     {
-        //
+        return $this->meetingService->update($request, $id);
     }
 
-    public function destroy(Meeting $meeting)
+    public function destroy($id)
     {
-        //
+        return $this->meetingService->delete($id);
     }
 }
