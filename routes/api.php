@@ -32,16 +32,30 @@ Route::post('login', [AuthController::class, 'login']);
 Route::post('signup', [AuthController::class, 'signUp']);
 Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 Route::get('getUser', [AuthController::class, 'getUser'])->middleware('auth:sanctum');
-Route::get('usersList', [AuthController::class, 'usersList'])->middleware('auth:sanctum');
 
+Route::group(['middleware' => ['role:super-admin|admin|manager']], function () {
+    Route::get('usersList', [AuthController::class, 'usersList'])->middleware('auth:sanctum');
+    Route::apiResources([
+        'regions' => RegionController::class,
+    ]);
+});
 
-Route::apiResources([
-    'producttypes' => ProducttypeController::class,
-    'products' => ProductController::class,
-    'regions' => RegionController::class,
-    'employees' => EmployeeController::class,
-    'aptekas' => AptekaController::class,
-    'doctors' => DoctorController::class,
-    'meetings' => MeetingController::class,
-    'warehouses' => WarehouseController::class,
-]);
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::group(['middleware' => ['role:admin']], function () {
+        Route::apiResources([
+            'doctors' => DoctorController::class,
+            'aptekas' => AptekaController::class,
+            'products' => ProductController::class,
+            'employees' => EmployeeController::class,
+            'producttypes' => ProducttypeController::class,
+        ]);
+    });
+
+    Route::group(['middleware' => ['role:manager']], function () {
+        Route::apiResources([
+            'meetings' => MeetingController::class,
+            'warehouses' => WarehouseController::class,
+        ]);
+    });
+});
+

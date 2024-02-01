@@ -50,12 +50,13 @@ class AuthService extends Controller
     public function logout(Request $request)
     {
         auth()->user()->tokens()->delete();
-        return $this->success('User successfully registered', 200);
+        return $this->success('User successfully logout', 200);
     }
 
     public function thisUser()
     {
         $user = auth()->user();
+        $roles = $user->getRoleNames();
         if ($user){
             return new UserResource($user);
         }else
