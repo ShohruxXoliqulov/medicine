@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreAptekaRequest;
+use App\Http\Requests\UpdateAptekaRequest;
 use App\Services\AptekaService;
 
 class AptekaController extends Controller
@@ -30,7 +31,7 @@ class AptekaController extends Controller
     }
 
 
-    public function update(StoreAptekaRequest $request, $id)
+    public function update(UpdateAptekaRequest $request, $id)
     {
         return $this->aptekaService->update($request, $id);
     }
