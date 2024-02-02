@@ -2,30 +2,29 @@
 
 namespace Database\Seeders;
 
-use App\Models\Producttype;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\ProductType;
 use Illuminate\Database\Seeder;
 
-class ProducttypeSeeder extends Seeder
+class ProductTypeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Producttype::create([
+        ProductType::create([
             'name' => 'tabletka',
         ]);
 
-        Producttype::create([
+        ProductType::create([
             'name' => 'kapsula',
         ]);
 
-        Producttype::create([
+        ProductType::create([
             'name' => 'sirob',
         ]);
 
-        Producttype::create([
+        ProductType::create([
             'name' => 'flacon',
         ]);
     }

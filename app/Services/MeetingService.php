@@ -2,12 +2,11 @@
 
 namespace App\Services;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMeetingRequest;
 use App\Http\Requests\UpdateMeetingRequest;
 use App\Repositories\Interfaces\MeetingInterface;
 
-class MeetingService extends Controller
+class MeetingService
 {
     public $meetingInterface;
 

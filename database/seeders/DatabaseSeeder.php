@@ -22,8 +22,7 @@ class DatabaseSeeder extends Seeder
             MeetingSeeder::class,
             ProductSeeder::class,
             EmployeeSeeder::class,
-
-            ProducttypeSeeder::class,
+            ProductTypeSeeder::class,
         ]);
     }
 }

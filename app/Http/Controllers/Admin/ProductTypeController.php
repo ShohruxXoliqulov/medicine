@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\StoreProducttypeRequest;
-use App\Http\Requests\UpdateProducttypeRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreProductTypeRequest;
+use App\Http\Requests\UpdateProductTypeRequest;
 use App\Services\ProductTypeService;
 
-class ProducttypeController extends Controller
+class ProductTypeController extends Controller
 {
 
     private $productTypeService;
@@ -22,7 +23,7 @@ class ProducttypeController extends Controller
     }
 
 
-    public function store(StoreProducttypeRequest $request)
+    public function store(StoreProductTypeRequest $request)
     {
         return $this->productTypeService->create($request);
     }
@@ -34,7 +35,7 @@ class ProducttypeController extends Controller
     }
 
 
-    public function update(UpdateProducttypeRequest $request, $id)
+    public function update(UpdateProductTypeRequest $request, $id)
     {
         return $this->productTypeService->update($request, $id);
     }

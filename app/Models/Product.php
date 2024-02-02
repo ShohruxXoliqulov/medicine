@@ -14,12 +14,12 @@ class Product extends Model
     protected $fillable = [
         'name',
         'price',
-        'producttype_id',
+        'product_type_id',
     ];
 
-    public function producttype(): BelongsTo
+    public function product_type(): BelongsTo
     {
-        return $this->belongsTo(Producttype::class);
+        return $this->belongsTo(ProductType::class);
     }
 
     public function warehouses(): HasMany

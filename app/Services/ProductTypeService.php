@@ -2,12 +2,11 @@
 
 namespace App\Services;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreProducttypeRequest;
-use App\Http\Requests\UpdateProducttypeRequest;
+use App\Http\Requests\StoreProductTypeRequest;
+use App\Http\Requests\UpdateProductTypeRequest;
 use App\Repositories\Interfaces\ProductTypeInterface;
 
-class ProductTypeService extends Controller
+class ProductTypeService
 {
     public $productTypeInterface;
 
@@ -20,7 +19,7 @@ class ProductTypeService extends Controller
         return $this->productTypeInterface->getAll();
     }
 
-    public function create(StoreProducttypeRequest $request)
+    public function create(StoreProductTypeRequest $request)
     {
         return $this->productTypeInterface->create($request);
     }
@@ -30,7 +29,7 @@ class ProductTypeService extends Controller
         return $this->productTypeInterface->show($id);
     }
 
-    public function update(UpdateProducttypeRequest $request, $id)
+    public function update(UpdateProductTypeRequest $request, $id)
     {
         return $this->productTypeInterface->update($request, $id);
     }

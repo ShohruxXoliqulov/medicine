@@ -2,12 +2,11 @@
 
 namespace App\Services;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRegionRequest;
 use App\Http\Requests\UpdateRegionRequest;
 use App\Repositories\Interfaces\RegionInterface;
 
-class RegionService extends Controller
+class RegionService
 {
     public $regionInterface;
 

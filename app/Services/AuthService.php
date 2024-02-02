@@ -2,13 +2,12 @@
 
 namespace App\Services;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\SignupRequest;
 use App\Repositories\Interfaces\AuthInterface;
 use Illuminate\Http\Request;
 
-class AuthService extends Controller
+class AuthService
 {
     public $authInterface;
 

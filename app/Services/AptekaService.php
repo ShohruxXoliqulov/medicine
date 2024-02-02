@@ -1,12 +1,11 @@
 <?php
 namespace App\Services;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAptekaRequest;
 use App\Http\Requests\UpdateAptekaRequest;
 use App\Repositories\Interfaces\AptekaInterface;
 
-class AptekaService extends Controller
+class AptekaService
 {
     public $aptekaInterface ;
 
@@ -40,4 +39,4 @@ class AptekaService extends Controller
     }
 }
 
-?>
+

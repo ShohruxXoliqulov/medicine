@@ -2,12 +2,11 @@
 
 namespace App\Services;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreWarehouseRequest;
 use App\Http\Requests\UpdateWarehouseRequest;
 use App\Repositories\Interfaces\WarehouseInterface;
 
-class WarehouseService extends Controller
+class WarehouseService
 {
     public $warehouseInterface;
 

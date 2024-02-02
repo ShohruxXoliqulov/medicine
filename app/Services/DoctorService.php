@@ -2,12 +2,11 @@
 
 namespace App\Services;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreDoctorRequest;
 use App\Http\Requests\UpdateDoctorRequest;
 use App\Repositories\Interfaces\DoctorInterface;
 
-class DoctorService extends Controller
+class DoctorService
 {
     public $doctorInterface;
 

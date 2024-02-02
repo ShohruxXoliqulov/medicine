@@ -2,8 +2,8 @@
 
 namespace App\Repositories;
 
-use App\Http\Requests\StoreProducttypeRequest;
-use App\Http\Requests\UpdateProducttypeRequest;
+use App\Http\Requests\StoreProductTypeRequest;
+use App\Http\Requests\UpdateProductTypeRequest;
 use App\Http\Resources\ProductTypeResource;
 use App\Http\Traits\ResponsesTrait;
 use App\Models\Producttype;
@@ -18,7 +18,7 @@ class ProductTypeRepository implements ProductTypeInterface
         return $this->response(ProductTypeResource::collection($producttypes));
     }
 
-    public function create(StoreProducttypeRequest $request)
+    public function create(StoreProductTypeRequest $request)
     {
         try {
             $productType = Producttype::create($request->all());
@@ -37,7 +37,7 @@ class ProductTypeRepository implements ProductTypeInterface
         return $this->error('ProductType doesn\'t exist', 404);
     }
 
-    public function update(UpdateProducttypeRequest $request, $id)
+    public function update(UpdateProductTypeRequest $request, $id)
     {
         $productType = Producttype::query()->where('id', $id)->first();
         if ($productType) {

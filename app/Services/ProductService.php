@@ -2,12 +2,11 @@
 
 namespace App\Services;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Repositories\Interfaces\ProductInterface;
 
-class ProductService extends Controller
+class ProductService
 {
     public $productInterface;
 

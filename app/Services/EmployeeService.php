@@ -2,12 +2,11 @@
 
 namespace App\Services;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
 use App\Repositories\Interfaces\EmployeeInterface;
 
-class EmployeeService extends Controller
+class EmployeeService
 {
     public $employeeInterface;
 
